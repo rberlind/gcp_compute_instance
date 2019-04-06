@@ -12,12 +12,12 @@ variable "gcp_project" {
 
 variable "gcp_region" {
   description = "GCP region, e.g. us-east1"
-  default = "us-east1"
+  default = "europe-west2"
 }
 
 variable "gcp_zone" {
   description = "GCP zone, e.g. us-east1-a"
-  default = "us-east1-b"
+  default = "europe-west2-a"
 }
 
 variable "machine_type" {
