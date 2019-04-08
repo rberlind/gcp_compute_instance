@@ -60,9 +60,9 @@ resource "google_compute_instance" "demo" {
     }
   }
 
-  /*service_account {
+  service_account {
     scopes = ["compute-ro", "monitoring", "service-control"]
-  }*/
+  }
 
   allow_stopping_for_update = true
 
