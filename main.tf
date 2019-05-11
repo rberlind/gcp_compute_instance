@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.11.1"
+  required_version = ">= 0.11.13"
 }
 
 variable "gcp_credentials" {
@@ -20,9 +20,14 @@ variable "gcp_zone" {
   default = "us-east1-b"
 }
 
-variable "machine_type" {
+variable "machine_type_1" {
   description = "GCP machine type"
   default = "n1-standard-1"
+}
+
+variable "machine_type_2" {
+  description = "GCP machine type"
+  default = "n1-standard-2"
 }
 
 variable "instance_name" {
@@ -41,9 +46,9 @@ provider "google" {
   region      = "${var.gcp_region}"
 }
 
-resource "google_compute_instance" "demo" {
+resource "google_compute_instance" "demo_1" {
   name         = "${var.instance_name}"
-  machine_type = "${var.machine_type}"
+  machine_type = "${var.machine_type_1}"
   zone         = "${var.gcp_zone}"
 
   boot_disk {
@@ -68,6 +73,37 @@ resource "google_compute_instance" "demo" {
 
 }
 
-output "external_ip"{
-  value = "${google_compute_instance.demo.network_interface.0.access_config.0.nat_ip}"
+resource "google_compute_instance" "demo_2" {
+  name         = "${var.instance_name}"
+  machine_type = "${var.machine_type_2}"
+  zone         = "${var.gcp_zone}"
+
+  boot_disk {
+    initialize_params {
+      image = "${var.image}"
+    }
+  }
+
+  network_interface {
+    network = "default"
+
+    access_config {
+      // Ephemeral IP
+    }
+  }
+
+  service_account {
+    scopes = ["compute-ro", "monitoring", "service-control"]
+  }
+
+  allow_stopping_for_update = true
+
+}
+
+output "external_ip_1"{
+  value = "${google_compute_instance.demo_1.network_interface.0.access_config.0.nat_ip}"
+}
+
+output "external_ip_2"{
+  value = "${google_compute_instance.demo_2.network_interface.0.access_config.0.nat_ip}"
 }
