@@ -26,9 +26,14 @@ variable "machine_type_2" {
   default = "n1-standard-2"
 }
 
-variable "instance_name" {
+variable "instance_name_1" {
   description = "GCP instance name"
-  default = "demo"
+  default = "demo-1"
+}
+
+variable "instance_name_2" {
+  description = "GCP instance name"
+  default = "demo-2"
 }
 
 variable "image" {
@@ -42,7 +47,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "demo_1" {
-  name         = "${var.instance_name}"
+  name         = "${var.instance_name_1}"
   machine_type = "${var.machine_type_1}"
   zone         = "${var.gcp_zone}"
 
@@ -69,7 +74,7 @@ resource "google_compute_instance" "demo_1" {
 }
 
 resource "google_compute_instance" "demo_2" {
-  name         = "${var.instance_name}"
+  name         = "${var.instance_name_2}"
   machine_type = "${var.machine_type_2}"
   zone         = "${var.gcp_zone}"
 
