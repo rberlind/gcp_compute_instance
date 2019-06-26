@@ -68,6 +68,12 @@ resource "google_compute_instance" "demo_1" {
   service_account {
     scopes = ["compute-ro", "monitoring", "service-control"]
   }
+  
+  labels {
+    owner = "roger"
+    ttl = "24"
+    name = "roger-demo"
+  }
 
   allow_stopping_for_update = true
 
@@ -94,6 +100,12 @@ resource "google_compute_instance" "demo_2" {
 
   service_account {
     scopes = ["compute-ro", "monitoring", "service-control"]
+  }
+  
+  labels {
+    owner = "roger"
+    ttl = "24"
+    name = "roger-demo"
   }
 
   allow_stopping_for_update = true
