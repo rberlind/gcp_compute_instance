@@ -74,6 +74,8 @@ resource "google_compute_instance" "demo_1" {
     ttl = "24"
     name = "roger-demo"
   }
+  
+  tags = ["production"]
 
   allow_stopping_for_update = true
 
