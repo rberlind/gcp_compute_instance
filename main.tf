@@ -65,6 +65,12 @@ resource "google_compute_instance" "demo" {
   }
 
   allow_stopping_for_update = true
+  
+  labels {
+    owner = "roger"
+    ttl = "24"
+    name = "roger-demo"
+  }
 
 }
 
