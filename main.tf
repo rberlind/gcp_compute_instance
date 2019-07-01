@@ -104,7 +104,7 @@ resource "google_compute_instance" "demo_2" {
     scopes = ["compute-ro", "monitoring", "service-control"]
   }
   
-  labels {
+  labels = {
     owner = "roger"
     ttl = "24"
     name = "roger-demo"
